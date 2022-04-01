@@ -17,5 +17,7 @@ FROM scratch
 
 COPY --from=builder /go/src/appdir/app /appdir/app
 
+EXPOSE 8080
+
 # run the app
 CMD ["/appdir/app"]
