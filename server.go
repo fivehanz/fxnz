@@ -11,7 +11,7 @@ import (
 func processRedirection(c echo.Context) error {
 	ID := c.Param("ID")
 	if ID == "bio" {
-		ID = "Hi Hanz"
+		c.Redirect(http.StatusMovedPermanently, "//withkoji.com/@fivehanz")
 	}
 	return c.String(http.StatusOK, ID)
 }
