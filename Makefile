@@ -12,3 +12,6 @@ clean:
 
 build-image:
 	docker buildx build -t ghcr.io/fivehanz/fxnz:latest . --platform linux/amd64
+
+push-image:
+	docker push ghcr.io/fivehanz/fxnz:latest
