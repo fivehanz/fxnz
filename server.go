@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
@@ -9,13 +10,24 @@ import (
 )
 
 func processRedirection(c echo.Context) error {
-	ID := c.Param("ID")
-	return c.String(http.StatusOK, ID)
+	slug := c.Param("slug")
+	return c.String(http.StatusOK, slug)
 }
 
 func main() {
+	port := 8080
+
 	e := echo.New()
-	e.GET("/:ID", processRedirection)
+
+	e.GET("/", func(c echo.Context) error {
+		return c.String(http.StatusNotFound, http.StatusText(http.StatusNotFound))
+	})
+
+	e.GET("/:slug", processRedirection)
+
+	e.GET("/api/:endpoint", func(c echo.Context) error {
+		return c.JSON(http.StatusOK, []string{"sample1", "sample2", c.Param("endpoint")})
+	})
 
 	s := &http2.Server{
 		MaxConcurrentStreams: 250,
@@ -23,5 +35,6 @@ func main() {
 		IdleTimeout:          10 * time.Second,
 	}
 
-	e.StartH2CServer(":8080", s)
+	e.Logger.Fatal(e.StartH2CServer(fmt.Sprintf("127.0.0.1:%v", port), s))
+
 }
