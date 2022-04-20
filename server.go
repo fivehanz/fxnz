@@ -1,40 +1,36 @@
+/*
+* 	main server
+*	author: @fivehanz
+*	updated: 20/04/2022
+ */
 package main
 
 import (
 	"fmt"
-	"net/http"
 	"time"
 
+	"github.com/fivehanz/fxnz/config"
+	"github.com/fivehanz/fxnz/routes"
 	"github.com/labstack/echo/v4"
 	"golang.org/x/net/http2"
 )
 
-func processRedirection(c echo.Context) error {
-	slug := c.Param("slug")
-	return c.String(http.StatusOK, slug)
-}
-
 func main() {
-	port := 8080
+	cfg, _ := config.GetConfig()
 
-	e := echo.New()
+	// create a new instance of echo
+	app := echo.New()
 
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusNotFound, http.StatusText(http.StatusNotFound))
-	})
+	// Import Routes from routes package
+	routes.Routes(app)
+	routes.API(app)
 
-	e.GET("/:slug", processRedirection)
-
-	e.GET("/api/:endpoint", func(c echo.Context) error {
-		return c.JSON(http.StatusOK, []string{"sample1", "sample2", c.Param("endpoint")})
-	})
-
+	// Start HTTP2 Server with Fatal Logger
 	s := &http2.Server{
 		MaxConcurrentStreams: 250,
 		MaxReadFrameSize:     1048576,
 		IdleTimeout:          10 * time.Second,
 	}
-
-	e.Logger.Fatal(e.StartH2CServer(fmt.Sprintf("0.0.0.0:%v", port), s))
+	app.Logger.Fatal(app.StartH2CServer(fmt.Sprintf("0.0.0.0:%v", cfg.App.Port), s))
 
 }
