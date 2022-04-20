@@ -15,9 +15,14 @@ RUN make build
 # fresh image for minimal size.
 FROM scratch
 
+ARG APP_NAME
+ENV APP_NAME=$APP_NAME
+ARG APP_PORT
+ENV APP_PORT=$APP_PORT
+
 COPY --from=builder /go/src/appdir/app /appdir/app
 
-EXPOSE 8080
+EXPOSE $APP_PORT
 
 # run the app
 CMD ["/appdir/app"]
