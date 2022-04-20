@@ -5,11 +5,6 @@ WORKDIR /go/src/appdir
 
 COPY . ./
 
-ARG APP_NAME
-ENV APP_NAME=$APP_NAME
-ARG APP_PORT
-ENV APP_PORT=$APP_PORT
-
 RUN go mod download
 
 RUN apk --no-cache add make
@@ -22,7 +17,8 @@ FROM scratch
 
 COPY --from=builder /go/src/appdir/app /appdir/app
 
-EXPOSE $APP_PORT
+# TODO: find out way to add custom port from env.
+EXPOSE 8080
 
 # run the app
 CMD ["/appdir/app"]

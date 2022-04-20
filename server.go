@@ -16,7 +16,7 @@ import (
 )
 
 func main() {
-	// @TODO handle config errors
+	// TODO: handle config errors
 	cfg, _ := config.GetConfig()
 
 	// create a new instance of echo
