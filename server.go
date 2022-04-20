@@ -35,6 +35,6 @@ func main() {
 		IdleTimeout:          10 * time.Second,
 	}
 
-	e.Logger.Fatal(e.StartH2CServer(fmt.Sprintf("127.0.0.1:%v", port), s))
+	e.Logger.Fatal(e.StartH2CServer(fmt.Sprintf("0.0.0.0:%v", port), s))
 
 }
