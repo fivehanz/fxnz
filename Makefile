@@ -1,7 +1,7 @@
 BINARY_NAME=app
 
 build:
-	go build -tags netgo -ldflags '-s -w' -o app
+	go build -tags netgo -ldflags '-s -w' -o ${BINARY_NAME}
 
 run:
 	./${BINARY_NAME}
