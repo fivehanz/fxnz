@@ -5,8 +5,6 @@ WORKDIR /go/src/appdir
 
 COPY . ./
 
-RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env
-
 RUN go mod download
 
 RUN apk --no-cache add make
