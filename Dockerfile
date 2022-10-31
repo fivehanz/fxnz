@@ -1,5 +1,5 @@
 ## Step 1: build the image from source code.
-FROM golang:1.17-alpine as builder
+FROM golang:1.18-alpine as builder
 
 WORKDIR /go/src/appdir
 
@@ -17,7 +17,7 @@ FROM scratch
 
 COPY --from=builder /go/src/appdir/app /appdir/app
 
-# TODO: find out way to add custom port from env.
+# TODO: find out way to add custom port from env to config file (try non .env file method?).
 EXPOSE 8080
 
 # run the app

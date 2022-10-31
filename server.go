@@ -22,7 +22,7 @@ func main() {
 	// create a new instance of echo
 	app := echo.New()
 
-	// Import Routes from routes package
+	// import Routes from routes package
 	routes.Routes(app)
 	routes.API(app)
 

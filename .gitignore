@@ -30,3 +30,5 @@ tmp/
 
 # compiled binary
 app
+
+.vscode/*
