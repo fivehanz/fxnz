@@ -29,13 +29,15 @@ func GetConfig() (Configuration, error) {
 	myConfig := Configuration{}
 
 	DotEnvFeeder := feeder.DotEnv{Path: ".env"}
-	//	DotEnvFeeder2 := feeder.DotEnv{Path: "/etc/secrets/.env"}
+	EnvFeeder := feeder.Env{}
 
 	cfg := config.New()
 
 	cfg.AddFeeder(DotEnvFeeder)
-	//	cfg.AddFeeder(DotEnvFeeder2)
+	cfg.AddFeeder(EnvFeeder)
+
 	cfg.AddStruct(&myConfig)
+
 	err := cfg.Feed()
 
 	return myConfig, err
