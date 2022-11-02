@@ -26,12 +26,17 @@ func main() {
 	routes.Routes(app)
 	routes.API(app)
 
-	// Start HTTP2 Server with Fatal Logger
+	// setup http2 server
 	s := &http2.Server{
 		MaxConcurrentStreams: 250,
 		MaxReadFrameSize:     1048576,
 		IdleTimeout:          10 * time.Second,
 	}
-	app.Logger.Fatal(app.StartH2CServer(fmt.Sprintf("0.0.0.0:%v", cfg.App.Port), s))
 
+	// TODO: handle empty config with default values
+	// default port
+	//Port := 8080
+
+	// Start HTTP2 Server with Fatal Logger
+	app.Logger.Fatal(app.StartH2CServer(fmt.Sprintf("0.0.0.0:%v", cfg.App.Port), s))
 }

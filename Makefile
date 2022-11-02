@@ -10,8 +10,11 @@ clean:
 	go clean
 	rm ${BINARY_NAME}
 
-build-image:
+build-image-amd64:
 	docker buildx build -t ghcr.io/fivehanz/fxnz:latest . --platform linux/amd64
+
+build-image-arm:
+	docker buildx build -t ghcr.io/fivehanz/fxnz:latest . --platform linux/arm64/v8
 
 push-image:
 	docker push ghcr.io/fivehanz/fxnz:latest

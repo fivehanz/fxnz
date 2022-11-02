@@ -1,5 +1,5 @@
-## Step 1: build the image from source code.
-FROM golang:1.18-alpine as builder
+## build the image from source code.
+FROM golang:1.18-alpine
 
 WORKDIR /go/src/appdir
 
@@ -11,14 +11,11 @@ RUN apk --no-cache add make
 
 RUN make build
 
-## Step 2: create image for deployment
-# fresh image for minimal size.
-FROM scratch
+# TODO: env not working when running 
+ENV APP_PORT 8080 
+ENV APP_NAME "app_name"
 
-COPY --from=builder /go/src/appdir/app /appdir/app
-
-# TODO: find out way to add custom port from env to config file (try non .env file method?).
 EXPOSE 8080
 
 # run the app
-CMD ["/appdir/app"]
+CMD ["/bin/sh", "-c", "APP_NAME=${APP_NAME} APP_PORT=${APP_PORT} /go/src/appdir/app"]
