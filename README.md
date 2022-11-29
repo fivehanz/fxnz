@@ -5,18 +5,18 @@ Personal Link Management System with GraphQL API
 TODO
 
 - [x] Auto build dev environment and Config Setup
-  - [x] os env variable is picked up  
+  - [x] os env variable is picked up
   - [x] config works in container
-  - [ ] check if it works in productioin
+  - [ ] check if it works in production
 - [ ] convert TODO to issues
-- [ ] ORM 
+- [ ] ORM
 - [ ] DB setup
 - [ ] auth system
 - [ ] GraphQL setup (juniper?)
 - [ ] build with gitlab CI
 - [ ] deploy using argocd and k8s
 - [ ] implement tests
-- [ ] semantic versioning automation 
+- [ ] semantic versioning automation
 - [ ] change to trunk based development
 
 Schema
