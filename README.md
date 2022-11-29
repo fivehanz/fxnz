@@ -7,15 +7,16 @@ TODO
 - [x] Auto build dev environment and Config Setup
   - [x] os env variable is picked up  
   - [x] config works in container
-  - [ ] check if it works in production	
+  - [ ] check if it works in productioin
+- [ ] convert TODO to issues
 - [ ] ORM 
 - [ ] DB setup
 - [ ] auth system
 - [ ] GraphQL setup (juniper?)
-- [ ] semantic versioning automation
-- [ ] build with github actions
+- [ ] build with gitlab CI
 - [ ] deploy using argocd and k8s
-  - [ ] set up next and prod version
-- [ ] expose using cloudflare tunnel (if vm)
+- [ ] implement tests
+- [ ] semantic versioning automation 
+- [ ] change to trunk based development
 
 Schema
