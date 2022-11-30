@@ -13,7 +13,7 @@ TODO
 - [ ] DB setup
 - [ ] auth system
 - [ ] GraphQL setup (juniper?)
-- [ ] build with gitlab CI
+- [x] build with gitlab CI
 - [ ] deploy using argocd and k8s
 - [ ] implement tests
 - [ ] semantic versioning automation
