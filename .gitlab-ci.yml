@@ -1,0 +1,43 @@
+
+
+stages:
+  - build
+  - test
+  - update-cd-repo
+
+
+build-image-with-sha:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}"
+
+build-image-with-tag:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}"
+  rules:
+    - if: $CI_COMMIT_TAG
+
+test-job1:
+  stage: test
+  script:
+    - echo "This job tests something"
+
+
+update-cd-repo:
+  stage: update-cd-repo
+  script:
+    - echo "This job updates the cd repo."
+  environment: production
