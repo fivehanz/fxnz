@@ -17,6 +17,6 @@ TODO
 - [ ] deploy using argocd and k8s
 - [ ] implement tests
 - [ ] semantic versioning automation
-- [ ] change to trunk based development, (ref)[https://cloud.google.com/architecture/devops/devops-tech-trunk-based-development]
+- [ ] change to trunk based development, [https://cloud.google.com/architecture/devops/devops-tech-trunk-based-development](ref)
 
 Schema
