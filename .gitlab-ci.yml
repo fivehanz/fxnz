@@ -46,7 +46,7 @@ update-dev:
   script:
     - git clone https://${CI_USERNAME}:${CI_PUSH_TOKEN}@gitlab.com/fivehanz/lms-cd-files.git
     - cd lms-cd-files/dev
-    - echo "update the deployment yaml file" >> testfile
+    - echo "update the deployment yaml file" >> testfile & git add testfile
     - git commit -am 'DEV image update'
     - git push origin main
   environment: development
