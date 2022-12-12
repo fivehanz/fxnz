@@ -50,7 +50,7 @@ update-dev:
     - echo "update the deployment yaml file" >> testfile 
     - git add testfile
     - git commit -am 'DEV image update'
-    - git push --set-upstream-to=origin/main
+    - git push origin main
   environment: development
 
 update-staging:
