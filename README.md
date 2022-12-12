@@ -3,7 +3,7 @@
 Personal Link Management System with GraphQL API
 
 
-ArgoCD and K8S manifest files ---> [here](https://gitlab.com/fivehanz/lms-cd-repo)
+ArgoCD and K8S manifest files ---> [here](https://gitlab.com/fivehanz/lms-cd-files)
 
 
 TODO
