@@ -35,7 +35,6 @@ test-job1:
   script:
     - echo "This job tests something"
 
-
 update-dev:
   stage: update-cd-repo
   image: alpine:3.8
@@ -46,25 +45,41 @@ update-dev:
   script:
     - git clone https://${CI_USERNAME}:${CI_PUSH_TOKEN}@gitlab.com/fivehanz/lms-cd-files.git
     - cd lms-cd-files/dev
-    # - git remote set-url origin https://${CI_USERNAME}:${CI_PUSH_TOKEN}@gitlab.com/fivehanz/lms-cd-files.git
-    - echo "update the deployment yaml file" >> testfile 
-    - git add testfile
-    - git commit -am 'DEV image update'
+    - sed -i -E "s/${CI_REGISTRY_IMAGE}:[A-Za-z0-9]+/${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}/g"
+    - git commit -am "DEV image update"
     - git push origin main
   environment: development
 
 update-staging:
   stage: update-cd-repo
+  image: alpine:3.8
+  before_script:
+    - apk add --no-cache git bash
+    - git config --global user.email "gitlab@gitlab.com"
+    - git config --global user.name "GitLab CI"
   script:
-    - echo "This job updates the STAGING cd repo."
+    - git clone https://${CI_USERNAME}:${CI_PUSH_TOKEN}@gitlab.com/fivehanz/lms-cd-files.git
+    - cd lms-cd-files/staging
+    - sed -i -E "s/${CI_REGISTRY_IMAGE}:[A-Za-z0-9]+/${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}/g"
+    - git commit -am "STAGING image update"
+    - git push origin main
   environment: staging
   rules:
     - if: $CI_COMMIT_TAG
 
 update-production:
   stage: update-cd-repo
+  image: alpine:3.8
+  before_script:
+    - apk add --no-cache git bash
+    - git config --global user.email "gitlab@gitlab.com"
+    - git config --global user.name "GitLab CI"
   script:
-    - echo "This job updates the PROD cd repo."
+    - git clone https://${CI_USERNAME}:${CI_PUSH_TOKEN}@gitlab.com/fivehanz/lms-cd-files.git
+    - cd lms-cd-files/prod
+    - sed -i -E "s/${CI_REGISTRY_IMAGE}:[A-Za-z0-9]+/${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}/g"
+    - git commit -am "PROD image update"
+    - git push origin main
   environment: production
   rules:
     - if: $CI_COMMIT_TAG
