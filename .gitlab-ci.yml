@@ -45,7 +45,7 @@ update-dev:
   script:
     - git clone https://${CI_USERNAME}:${CI_PUSH_TOKEN}@gitlab.com/fivehanz/lms-cd-files.git
     - cd lms-cd-files/dev
-    - sed -i -E "s/${CI_REGISTRY_IMAGE}:[A-Za-z0-9]+/${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}/g"
+    - sed -i -E "s/${CI_REGISTRY_IMAGE}:[A-Za-z0-9]+/${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}/g" lms-deployment.yaml
     - git commit -am "DEV image update"
     - git push origin main
   environment: development
@@ -60,7 +60,7 @@ update-staging:
   script:
     - git clone https://${CI_USERNAME}:${CI_PUSH_TOKEN}@gitlab.com/fivehanz/lms-cd-files.git
     - cd lms-cd-files/staging
-    - sed -i -E "s/${CI_REGISTRY_IMAGE}:[A-Za-z0-9]+/${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}/g"
+    - sed -i -E "s/${CI_REGISTRY_IMAGE}:[A-Za-z0-9]+/${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}/g" lms-deployment.yaml
     - git commit -am "STAGING image update"
     - git push origin main
   environment: staging
@@ -77,7 +77,7 @@ update-production:
   script:
     - git clone https://${CI_USERNAME}:${CI_PUSH_TOKEN}@gitlab.com/fivehanz/lms-cd-files.git
     - cd lms-cd-files/prod
-    - sed -i -E "s/${CI_REGISTRY_IMAGE}:[A-Za-z0-9]+/${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}/g"
+    - sed -i -E "s/${CI_REGISTRY_IMAGE}:[A-Za-z0-9]+/${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}/g" lms-deployment.yaml
     - git commit -am "PROD image update"
     - git push origin main
   environment: production
