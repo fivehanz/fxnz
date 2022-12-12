@@ -45,7 +45,6 @@ update-dev:
     - git config --global user.email "gitlab@gitlab.com"
     - git config --global user.name "GitLab CI"
   script:
-    - git checkout main
     - git pull origin main
     - cd dev
     - echo "updates the deployment yaml file"
