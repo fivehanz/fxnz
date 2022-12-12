@@ -46,11 +46,11 @@ update-dev:
   script:
     - git clone https://${CI_USERNAME}:${CI_PUSH_TOKEN}@gitlab.com/fivehanz/lms-cd-files.git
     - cd lms-cd-files/dev
-    - git remote set-url origin https://${CI_USERNAME}:${CI_PUSH_TOKEN}@gitlab.com/fivehanz/lms-cd-files.git
+    # - git remote set-url origin https://${CI_USERNAME}:${CI_PUSH_TOKEN}@gitlab.com/fivehanz/lms-cd-files.git
     - echo "update the deployment yaml file" >> testfile 
     - git add testfile
     - git commit -am 'DEV image update'
-    - git push origin main
+    - git push --set-upstream-to=origin/main
   environment: development
 
 update-staging:
