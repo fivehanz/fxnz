@@ -1,7 +1,7 @@
 /*
 * 	routes
 *	author: @fivehanz
-*	updated: 20/04/2022
+*	updated: 12/12/2022
  */
 
 package routes
@@ -19,7 +19,7 @@ func Routes(app *echo.Echo) {
 	cfg, _ := config.GetConfig()
 	// Home Route
 	app.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, fmt.Sprintf("Hi! This is %v", cfg.App.Name))
+		return c.String(http.StatusOK, "Hey, if you can read this -- ArgoCD is working")
 	})
 
 	// Route to redirect the respective URL
