@@ -7,16 +7,15 @@
 package routes
 
 import (
-	"fmt"
+	//	"fmt"
 	"net/http"
 
-	"github.com/fivehanz/fxnz/config"
+	//	"github.com/fivehanz/fxnz/config"
 	"github.com/fivehanz/fxnz/links"
 	"github.com/labstack/echo/v4"
 )
 
 func Routes(app *echo.Echo) {
-	cfg, _ := config.GetConfig()
 	// Home Route
 	app.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hey, if you can read this -- ArgoCD is working")
