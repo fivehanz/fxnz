@@ -36,8 +36,36 @@ test-job1:
     - echo "This job tests something"
 
 
-update-cd-repo:
+update-dev:
+  stage: update-cd-repo
+  image: alpine:3.8
+  before_script:
+    - apk add --no-cache git bash
+    - git remote set-url origin https://${CI_USERNAME}:${CI_PUSH_TOKEN}@gitlab.com/fivehanz/lms-cd-files.git
+    - git config --global user.email "gitlab@gitlab.com"
+    - git config --global user.name "GitLab CI"
+  script:
+    - git checkout -b main
+    - git pull origin main
+    - cd dev
+    - echo "updates the deployment yaml file"
+    - git commit -am 'DEV image update'
+    - git push origin main
+  environment: development
+
+update-staging:
   stage: update-cd-repo
   script:
-    - echo "This job updates the cd repo."
+    - echo "This job updates the STAGING cd repo."
+  environment: staging
+  rules:
+    - if: $CI_COMMIT_TAG
+
+update-production:
+  stage: update-cd-repo
+  script:
+    - echo "This job updates the PROD cd repo."
   environment: production
+  rules:
+    - if: $CI_COMMIT_TAG
+  when: manual
