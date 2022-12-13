@@ -48,7 +48,7 @@ update-dev:
     - git clone https://${CI_USERNAME}:${CI_PUSH_TOKEN}@gitlab.com/fivehanz/lms-cd-files.git
     - cd lms-cd-files/dev
     - sed -E -i "s|${CI_REGISTRY_IMAGE}:[A-Za-z0-9]+|${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}|g" ./lms-deployment.yaml
-    - git commit -am "DEV image update"
+    - git commit -am "DEV image update ${CI_COMMIT_SHORT_SHA}"
     - git push origin main
   environment: development
 
@@ -63,7 +63,7 @@ update-staging:
     - git clone https://${CI_USERNAME}:${CI_PUSH_TOKEN}@gitlab.com/fivehanz/lms-cd-files.git
     - cd lms-cd-files/staging
     - sed -E -i "s|${CI_REGISTRY_IMAGE}:[A-Za-z0-9]+|${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}|g" ./lms-deployment.yaml
-    - git commit -am "STAGING image update"
+    - git commit -am "STAGING image update ${CI_COMMIT_TAG}"
     - git push origin main
   environment: staging
   rules:
@@ -80,7 +80,7 @@ update-production:
     - git clone https://${CI_USERNAME}:${CI_PUSH_TOKEN}@gitlab.com/fivehanz/lms-cd-files.git
     - cd lms-cd-files/prod
     - sed -E -i "s|${CI_REGISTRY_IMAGE}:[A-Za-z0-9]+|${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}|g" ./lms-deployment.yaml
-    - git commit -am "PROD image update"
+    - git commit -am "PROD image update ${CI_COMMIT_TAG}"
     - git push origin main
   environment: production
   rules:
