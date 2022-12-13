@@ -3,7 +3,9 @@
 stages:
   - build
   - test
-  - update-cd-repo
+  - update-cd-repo-dev
+  - update-cd-repo-staging
+  - update-cd-repo-prod
 
 
 build-image-with-sha:
@@ -36,7 +38,7 @@ test-job1:
     - echo "This job tests something"
 
 update-dev:
-  stage: update-cd-repo
+  stage: update-cd-repo-dev
   image: alpine:3.8
   before_script:
     - apk add --no-cache git
@@ -51,7 +53,7 @@ update-dev:
   environment: development
 
 update-staging:
-  stage: update-cd-repo
+  stage: update-cd-repo-staging
   image: alpine:3.8
   before_script:
     - apk add --no-cache git bash
@@ -68,7 +70,7 @@ update-staging:
     - if: $CI_COMMIT_TAG
 
 update-production:
-  stage: update-cd-repo
+  stage: update-cd-repo-prod
   image: alpine:3.8
   before_script:
     - apk add --no-cache git bash
