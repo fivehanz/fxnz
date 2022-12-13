@@ -1,12 +1,8 @@
-
-
 stages:
   - build
-  - test
   - update-cd-repo-dev
   - update-cd-repo-staging
   - update-cd-repo-prod
-
 
 build-image-with-sha:
   stage: build
@@ -32,11 +28,6 @@ build-image-with-tag:
   rules:
     - if: $CI_COMMIT_TAG
 
-test-job1:
-  stage: test
-  script:
-    - echo "This job tests something"
-
 update-dev:
   stage: update-cd-repo-dev
   image: alpine:3.8
@@ -47,6 +38,7 @@ update-dev:
   script:
     - git clone https://${CI_USERNAME}:${CI_PUSH_TOKEN}@gitlab.com/fivehanz/lms-cd-files.git
     - cd lms-cd-files/dev
+    # replaces hash with hash
     - sed -E -i "s|${CI_REGISTRY_IMAGE}:[A-Za-z0-9]+|${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}|g" ./lms-deployment.yaml
     - git commit -am "DEV image update ${CI_COMMIT_SHORT_SHA}"
     - git push origin main
@@ -62,7 +54,8 @@ update-staging:
   script:
     - git clone https://${CI_USERNAME}:${CI_PUSH_TOKEN}@gitlab.com/fivehanz/lms-cd-files.git
     - cd lms-cd-files/staging
-    - sed -E -i "s|${CI_REGISTRY_IMAGE}:[A-Za-z0-9]+|${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}|g" ./lms-deployment.yaml
+    # replaces tag with tag string
+    - sed -E -i "s|${CI_REGISTRY_IMAGE}:v[0-9]\.[0-9]\.[0-9]|${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}|g" ./lms-deployment.yaml
     - git commit -am "STAGING image update ${CI_COMMIT_TAG}"
     - git push origin main
   environment: staging
@@ -79,7 +72,8 @@ update-production:
   script:
     - git clone https://${CI_USERNAME}:${CI_PUSH_TOKEN}@gitlab.com/fivehanz/lms-cd-files.git
     - cd lms-cd-files/prod
-    - sed -E -i "s|${CI_REGISTRY_IMAGE}:[A-Za-z0-9]+|${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}|g" ./lms-deployment.yaml
+    # replaces tag with string
+    - sed -E -i "s|${CI_REGISTRY_IMAGE}:v[0-9]\.[0-9]\.[0-9]|${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}|g" ./lms-deployment.yaml
     - git commit -am "PROD image update ${CI_COMMIT_TAG}"
     - git push origin main
   environment: production
