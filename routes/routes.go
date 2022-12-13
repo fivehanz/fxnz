@@ -18,7 +18,7 @@ import (
 func Routes(app *echo.Echo) {
 	// Home Route
 	app.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hey, if you can read this -- ArgoCD is working -- #3")
+		return c.String(http.StatusOK, "Hey, if you can read this -- ArgoCD is working -- #4")
 	})
 
 	// Route to redirect the respective URL
