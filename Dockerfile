@@ -1,23 +1,14 @@
-## Step 1: build the image from source code.
-FROM golang:1.17-alpine as builder
+## build the image from source code.
+FROM golang:1.18-alpine
 
 WORKDIR /go/src/appdir
 
 COPY . ./
 
-RUN go mod download
+RUN apk --no-cache add make && go mod download && make build && go clean -modcache -r -cache && apk del make 
 
-RUN apk --no-cache add make
-
-RUN make build
-
-## Step 2: create image for deployment
-# fresh image for minimal size.
-FROM scratch
-
-COPY --from=builder /go/src/appdir/app /appdir/app
-
-EXPOSE 8080
+ENV APP_PORT 8080 
+ENV APP_NAME "new_app_name"
 
 # run the app
-CMD ["/appdir/app"]
+CMD ["/bin/sh", "-c", "APP_NAME=${APP_NAME} APP_PORT=${APP_PORT} /go/src/appdir/app"]
