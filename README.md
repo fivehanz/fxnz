@@ -11,7 +11,7 @@ TODO
 - [x] Auto build dev environment and Config Setup
   - [x] os env variable is picked up
   - [x] config works in container
-  - [ ] config works in production
+  - [ ] config works in production within k8s
 - [ ] convert TODO to issues
 - [ ] ORM
 - [ ] DB setup
