@@ -2,9 +2,7 @@
 
 Personal Link Management System with GraphQL API
 
-
 ArgoCD and K8S manifest files ---> [here](https://gitlab.com/fivehanz/lms-cd-files)
-
 
 TODO
 
@@ -24,3 +22,5 @@ TODO
 - [ ] change to trunk based development, [ref](https://cloud.google.com/architecture/devops/devops-tech-trunk-based-development)
 
 Schema
+
+Note: the project is being ported to rust with axum and tokio ecosystem.
