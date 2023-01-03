@@ -136,8 +136,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "fxnz"
-version = "0.1.0"
+name = "hanz"
+version = "1.0.0"
 dependencies = [
  "axum",
  "tokio",
