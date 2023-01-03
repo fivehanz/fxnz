@@ -30,7 +30,7 @@ build-image-with-tag:
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
       --destination "${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}"
   rules:
-    - if: $CI_COMMIT_TAG || $CI_COMMIT_BRANCH  == "main"
+    - if: $CI_COMMIT_TAG && $CI_COMMIT_BRANCH  == "main"
 
 ### runs on every commit on the main branch
 update-dev:
@@ -68,7 +68,7 @@ update-dev:
 #     - git push origin main
 #   environment: staging
 #   rules:
-#     - if: $CI_COMMIT_TAG || $CI_COMMIT_BRANCH  == "main"
+#     - if: $CI_COMMIT_TAG && $CI_COMMIT_BRANCH  == "main"
 
 ### runs only if commit tag is present and started manually.
 update-production:
@@ -87,5 +87,5 @@ update-production:
     - git push origin main
   environment: production
   rules:
-    - if: $CI_COMMIT_TAG || $CI_COMMIT_BRANCH  == "main"
+    - if: $CI_COMMIT_TAG && $CI_COMMIT_BRANCH  == "main"
   when: manual
