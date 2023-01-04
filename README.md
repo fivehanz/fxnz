@@ -6,8 +6,10 @@ ArgoCD and K8S manifest files ---> [here](https://gitlab.com/fivehanz/lms-cd-fil
 
 TODO
 
-- [ ] structured folders for routes, models
-- [ ] organized file structure with main and lib.rs
+- [ ] structured folders/mods for routes, models, database
+- [x] organized file structure with main and lib.rs
+- [ ] setup tracing & monitoring
+- [ ] setup health checks and status checks
 - [ ] convert TODO to issues
 - [ ] DB & ORM -- sea orm, postgres
 - [ ] auth system
