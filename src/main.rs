@@ -2,5 +2,7 @@ use hanzlol::app;
 
 #[tokio::main]
 async fn main() {
-   app().await
+
+    // run the app server
+    app().await
 }
