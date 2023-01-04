@@ -1,4 +1,4 @@
-# fxnz
+# hanz.lol
 
 Personal Link Management System with GraphQL API
 
