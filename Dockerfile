@@ -17,7 +17,7 @@ RUN cargo build --target x86_64-unknown-linux-musl --release
 FROM alpine:3.17 as runtime
 
 ## copy from the builder to runtime
-COPY --from=builder /usr/workspace/target/x86_64-unknown-linux-musl/release/hanz /usr/local/bin
+COPY --from=builder /usr/workspace/target/x86_64-unknown-linux-musl/release/hanzlol /usr/local/bin
 
 #ENV APP_PORT 8080 
 #ENV APP_NAME "new_app_name"
@@ -25,4 +25,4 @@ COPY --from=builder /usr/workspace/target/x86_64-unknown-linux-musl/release/hanz
 EXPOSE 8080
 
 # run the app
-CMD ["/usr/local/bin/hanz"]
+CMD ["/usr/local/bin/hanzlol"]

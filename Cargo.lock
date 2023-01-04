@@ -136,7 +136,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "hanz"
+name = "hanzlol"
 version = "1.0.0"
 dependencies = [
  "axum",
