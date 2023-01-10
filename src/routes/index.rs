@@ -8,5 +8,5 @@ pub async fn slug_handler(Path(slug): Path<String>) -> String {
 
 // default home route handler
 pub async fn home() -> String {
-    String::from("Hey, if you can see this -- routes are working #2")
+    String::from("Hey, if you can see this -- routes are working #3 -- Rust.")
 }
