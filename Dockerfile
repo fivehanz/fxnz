@@ -5,24 +5,16 @@ WORKDIR /usr/workspace
 
 COPY . ./
 
-## install target platform (cross-compilation) -- needed for alpine
-RUN rustup target add x86_64-unknown-linux-musl
-
-#RUN apk --no-cache add make && go mod download && make build && go clean -modcache -r -cache && apk del make 
-
 ## build
-RUN cargo build --target x86_64-unknown-linux-musl --release
+RUN cargo build --release
 
 ##### runtime
-FROM alpine:3.17 as runtime
+FROM gcr.io/distroless/cc as runtime
 
 ## copy from the builder to runtime
-COPY --from=builder /usr/workspace/target/x86_64-unknown-linux-musl/release/hanzlol /usr/local/bin
-
-#ENV APP_PORT 8080 
-#ENV APP_NAME "new_app_name"
+COPY --from=builder /usr/workspace/target/release/hanzlol /
 
 EXPOSE 8080
 
 # run the app
-CMD ["/usr/local/bin/hanzlol"]
+CMD ["./hanzlol"]
