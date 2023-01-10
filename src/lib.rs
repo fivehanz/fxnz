@@ -4,9 +4,12 @@ mod database;
 use routes::routes;
 use axum::Server;
 use database::database_init;
+use sea_orm::DbErr;
 
-// main server 
-pub async fn app() {
+
+// main server runner
+// TODO: Change DbErr to include Server Errors
+pub async fn app() -> Result<(), DbErr> { 
     // initialize the routes
     let app = routes();
 
@@ -17,7 +20,10 @@ pub async fn app() {
         .unwrap();
 
     // run the db connection
-    database_init().await;
+    database_init().await?;
+
+    // everything's OK.
+    Ok(())
 }
 
 
