@@ -825,6 +825,7 @@ dependencies = [
  "dotenvy",
  "migration",
  "sea-orm",
+ "serde",
  "tokio",
 ]
 

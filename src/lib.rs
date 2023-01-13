@@ -1,5 +1,6 @@
 mod routes;
 mod database;
+mod model;
 
 use routes::routes;
 use axum::Server;
@@ -10,6 +11,10 @@ use sea_orm::DbErr;
 // main server runner
 // TODO: Change DbErr to include Server Errors
 pub async fn app() -> Result<(), DbErr> { 
+    // run the db connection and return database connection
+    // ! is it required here?
+    let _db = database_init().await?;
+
     // initialize the routes
     let app = routes();
 
@@ -18,9 +23,6 @@ pub async fn app() -> Result<(), DbErr> {
         .serve(app.into_make_service())
         .await
         .unwrap();
-
-    // run the db connection
-    database_init().await?;
 
     // everything's OK.
     Ok(())
