@@ -8,7 +8,6 @@ pub struct Migration;
 impl MigrationTrait for Migration {
     async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
         // Replace the sample below with your own migration scripts
-        // todo!();
 
         manager
             .create_table(
@@ -32,7 +31,20 @@ impl MigrationTrait for Migration {
                     .col(ColumnDef::new(Link::Slug).string().not_null())
                     .to_owned(),
             )
-            .await
+            .await?;
+
+        // sample seed data
+        let insert = Query::insert()
+            .into_table(Link::Table)
+            .columns([Link::UserId, Link::Url, Link::Slug])
+            .values_panic([1.into(), "https://campsite.bio/fivehanz".into(), "bio".into()])
+            .values_panic([1.into(), "https://www.linkedin.com/in/fivehanz/".into(), "linkedin".into()])
+            .to_owned();
+
+        // insert the data
+        manager.exec_stmt(insert).await?;
+
+        Ok(())
     }
 
     async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
