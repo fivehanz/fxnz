@@ -14,6 +14,8 @@ FROM gcr.io/distroless/cc as runtime
 ## copy from the builder to runtime
 COPY --from=builder /usr/workspace/target/release/hanzlol /
 
+ARG DATABASE_URL
+ENV DATABASE_URL ${DATABASE_URL}
 EXPOSE 8080
 
 # run the app
