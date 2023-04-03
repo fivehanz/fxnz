@@ -1,8 +1,8 @@
 pub use sea_orm_migration::prelude::*;
 
-
 mod m20230110_123833_create_user;
 mod m20230110_123842_create_link;
+
 
 pub struct Migrator;
 
