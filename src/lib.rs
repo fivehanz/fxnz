@@ -1,20 +1,15 @@
 mod routes;
 mod database;
 mod model;
+mod utils;
 
+use std::error::Error;
 use routes::routes;
 use axum::Server;
-use database::database_init;
-use sea_orm::DbErr;
-
 
 // main server runner
-// TODO: Change DbErr to include Server Errors
-pub async fn app() -> Result<(), DbErr> { 
-    // run the db connection and return database connection
-    // ! is it required here?
-    let _db = database_init().await?;
-
+// TODO: handle server errors
+pub async fn app() -> Result<(), Box<dyn Error>> { 
     // initialize the routes
     let app = routes();
 

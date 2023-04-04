@@ -5,5 +5,5 @@ use hanzlol::app;
 async fn main() {
 
     // run the app server
-    app().await.expect("Database Connection Failed.")
+    app().await.unwrap_or_else(|e| println!("{}", e))
 }

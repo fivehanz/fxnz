@@ -1,8 +1,17 @@
-use sea_orm::{Database, DbErr, DatabaseConnection};
+use sea_orm::{Database, DatabaseConnection};
 
 
 // connect database 
-pub async fn database_init() -> Result<DatabaseConnection, DbErr>{
-    Database::connect(dotenvy::var("DATABASE_URL").unwrap()).await
+pub async fn database_init() -> Result<DatabaseConnection, String> {
+    // check for ENV var; return error otherwise
+    match dotenvy::var("DATABASE_URL") {
+        Ok(db_string) => {
+            match Database::connect(db_string).await {
+                Ok(dbc) => Ok(dbc),
+                Err(e) => Err(format!("[ERORR]: {}", e))
+            }
+        },
+        Err(e) => Err(format!("[ERORR]: {}", e))
+    }    
 }
 
