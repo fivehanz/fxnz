@@ -1,7 +1,6 @@
 stages:
   - build
   - update-cd-repo-dev
-  # - update-cd-repo-staging
   - update-cd-repo-prod
 
 ### default build with short-SHA as tag with kaniko
@@ -50,8 +49,8 @@ update-production:
     - git clone https://${CI_USERNAME}:${CI_PUSH_TOKEN}@gitlab.com/fivehanz/lms-cd-files.git
     - cd lms-cd-files/prod
     # replaces tag with string
-    - sed -E -i "s|${CI_REGISTRY_IMAGE}:v[0-9]\.[0-9]\.[0-9]|${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}|g" ./lms-deployment.yaml
-    - git commit -am "PROD image update ${CI_COMMIT_TAG}"
+    - sed -E -i "s|${CI_REGISTRY_IMAGE}:[A-Za-z0-9]+|${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}|g" ./lms-deployment.yaml
+    - git commit -am "PROD image update ${CI_COMMIT_SHORT_SHA}"
     - git push origin main
   environment: production
   rules:
