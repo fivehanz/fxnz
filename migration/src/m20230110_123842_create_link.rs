@@ -37,7 +37,7 @@ impl MigrationTrait for Migration {
         let insert = Query::insert()
             .into_table(Link::Table)
             .columns([Link::UserId, Link::Url, Link::Slug])
-            .values_panic([1.into(), "https://campsite.bio/fivehanz".into(), "bio".into()])
+            .values_panic([1.into(), "https://ssup.co/s/hanz".into(), "bio".into()])
             .values_panic([1.into(), "https://www.linkedin.com/in/fivehanz/".into(), "linkedin".into()])
             .to_owned();
 
